@@ -1,0 +1,142 @@
+	This directory tree comprises the source code from
+the book "UNIX Network Programming" by W. Richard Stevens,
+published by Prentice Hall, 1990.
+
+---------------------------------------------------------------------
+	LIMITS OF LIABILITY AND DISCLAIMER OF WARRANTY
+
+The author and publisher of the book "UNIX Network Programming"
+have used their best efforts in preparing this software.
+These efforts include the development, research, and testing
+of the theories and programs to determine their effectiveness.
+The author and publisher make no warranty of any kind, express
+or implied, with regard to these programs or the documentation
+contained in the book. The author and publisher shall not be
+liable in any event for incidental or consequential damages in
+connection with, or arising out of, the furnishing, performance,
+or use of these programs.
+---------------------------------------------------------------------
+
+	As stated in the Preface of the book, the source code was
+tested under 4.3BSD on a VAX and AT&T's System V/386 Release 3.2
+on a Compaq 386/20.  There may be some comments and Makefile rules
+for Xenix since I started porting some of the software to Xenix.
+However, I found the existing Xenix socket libraries so poor that
+I never finished.
+
+	To start, check the files "systype.sh" and "systype.h"
+in either the "lib" or "lib.s5" directory.  These may have to
+be modified for your system.  Next, do a "make" in either of
+these directories to make the library "libnet.a".  This library
+is required to make most of the other programs (minimally because
+the error functions - err_XXX() - are in this library and these
+error functions are used by almost every program).
+
+	Note that there are a lot of links between files in
+different directories.  For example, the directories "fd" and "fd.s5"
+both use the same Makefile and main programs.  Only the files
+"sendfile.c" and "recvfile.c" in these directories are different
+between 4.3BSD and System V.
+
+	The directories are as follows:
+
+asyncio		The asynchronous I/O example from Section 6.12.
+
+fd		The file descriptor passing example for 4.3BSD from
+		Section 6.10.
+
+fd.s5		The file descriptor passing example for System V
+		from Section 7.10.
+
+inettime	The Internet time and daytime clients from Section 10.2.
+
+ipc		The IPC examples from Chapter 3.
+
+lib		The library of common functions for 4.3BSD.  These functions
+		come from all over the book.  Specifically:
+
+	lib/daemon.c		daemon_start() function - Sec. 2.6.
+	lib/dgsendrecv.c	Reliable message send/receive - Sec. 8.4.
+	lib/error.c		Error handling - Appendix A.3.
+	lib/hosterror.c		Sec. A.3.
+	lib/idpopen.c		Sec. 8.3.
+	lib/lock.c		Lock functions for lpr/seqno.c - Sec. 13.3.
+	lib/netdefs.h		Used by lib/XXXopen.c and tftp/netXXX.c.
+	lib/nspipe.c		Named stream pipe function - Sec. 6.9.
+	lib/pty.c		Pseudo tty routines - Sec. 15.4.
+	lib/readline.c		Sec. 6.6.
+	lib/readn.c		Sec. 6.6.
+	lib/rresvport.c		(Not in book; needed for WIN/TCP)
+	lib/rtt.c		Round-trip timing functions - Sec. 8.4.
+	lib/sigchild.c		daemon_start() SIGCLD handler - Sec. 2.6.
+	lib/spipe.c		Stream pipe function - Sec. 6.9.
+	lib/sppopen.c		Sec. 8.3.
+	lib/tcpopen.c		Sec. 8.3.
+	lib/timer.c		Timing functions used in TFTP - App. A.4.
+	lib/ttymode.c		Copy terminal mode - Sec. 15.5.
+	lib/ttyraw.c		Set terminal raw mode - Sec. 15.5.
+	lib/udpopen.c		Sec. 8.3.
+	lib/writen.c		Sec. 6.6.
+
+lib.s5		The library of common functions for System V.
+		See the list above for the "lib" directory.  The differences
+		are: idpopen.c, sppopen.c, and sigchild.c aren't in "lib.s5"
+		and "lib.s5" contains semaph.c (the simpler semaphore
+		operations - Sec. 3.10).
+
+lock		The record locking and file locking functions from
+		Section 3.2.
+
+lpr		The 4.3BSD line printer client - Section 13.3.
+
+net		The simple client-server examples from Section 6.6.
+		Also the socket option example from Section 6.11 and
+		the host entry example from Section 8.2.
+
+net.s5		The simple client-server examples from Section 7.6.
+		Also contains a program to print all the stream modules
+		on a given stream, and a program to print all the
+		TLI "struct t_info" values for your implementation.
+
+nspipe.s5	The named stream pipe example from Section 7.9.
+
+ping		The 4.3BSD Internet ping program from Section 11.2.
+
+rcmd		The rcmd() function and its rshd server from
+		Section 14.3.  Also the ruserok() function from
+		Section 9.2.
+
+record		The recording example from Sections 15.3 - 15.6.
+
+record.s5	The System V version of the recording example.
+
+reliable	The reliable message client and server from Section 8.4.
+
+rlogin		The 4.3BSD rlogin client and rlogind server from
+		Sections 15.11 and 15.12.
+
+rmt		The remote tape server from Section 16.4.
+
+rpc.courier/timedate	The Xerox Courier RPC example from Section 18.4.
+			Note that the Makefile will certainly have to be
+			modified, depending where you have installed the
+			Courier compiler, library, and include files.
+
+rpc.sun/timedate	The Sun RPC example from Section 18.3.
+			Note that the Makefile will certainly have to be
+			modified, depending where you have installed the
+			Sun RPC compiler and library.
+
+select		The higher precision timer, using the select system
+		call, from Section 6.13.
+
+tftp		The TFTP client and server from Chapter 12.
+
+xnsecho		The XNS IDP echo client from Section 11.3.
+
+	Please send me any bug fixes, comments, suggestions, etc.
+
+		Richard Stevens
+		Health Systems International, New Haven, CT
+		   stevens@hsi.com
+	           ... { uunet | yale } ! hsi ! stevens

@@ -1,0 +1,4 @@
+	When compiling date_clnt.c the vanilla 4.3BSD C compiler
+barfs on the "void *argp" when it encounters the reference to argp
+on line 15.  The fix is to hand edit this file, changing the "void *"
+to a "char *".

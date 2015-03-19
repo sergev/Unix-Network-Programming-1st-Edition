@@ -1,0 +1,9 @@
+#! /bin/sh
+
+#
+# Set the sequence number to 1.
+#
+
+cat > seqno <<EndOfScript
+001
+EndOfScript

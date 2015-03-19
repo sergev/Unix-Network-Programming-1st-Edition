@@ -1,0 +1,15 @@
+	The files here comprise the client and server library.
+But, files that can be compiled with either CLIENT or SERVER
+defined, are compiled as client functions.  This means that
+directories that require SERVER versions, must make their
+own link to the appropriate file in this directory.  This is
+done, for example, by the tftp directory, since it needs a
+version of error.c for the client and the server.  It has its
+own link to error.c and just compiles it with either CLIENT
+or SERVER defined.
+
+	The rresvport() function distributed with WIN/TCP doesn't
+appear to work right.  We've replaced it with the function in this
+directory, which is a copy of the file from the ../rcmd directory,
+modified to work with WIN/TCP.  This is needed for the lpr example
+to work with WIN/TCP.
